@@ -2,3 +2,7 @@
 <h1 align="center"> :floppy_disk: Preview :floppy_disk: </h1>
 
 <img src="./preview.gif" alt="BMPreader" align="center">
+
+### About:
+    BMPreader for 24 and 32 bit image.
+
