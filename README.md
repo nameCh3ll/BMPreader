@@ -7,5 +7,5 @@
     BMPreader for 24 and 32 bit image.
 
 ### Links:
-Source code: [CLICK](./src/).
-Test image: [CLICK](./image/).
+* Source code: [CLICK](./src/).
+* Test image: [CLICK](./image/).
