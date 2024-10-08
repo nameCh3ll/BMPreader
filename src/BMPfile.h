@@ -45,6 +45,7 @@ private:
 
   std::unordered_map<unsigned int, const char *> int_background_color{
       {0, "\u001b[40m"}, {255, "\u001b[47m"}};
+  std::unordered_map<unsigned int, const char *> int_char{{0, "."}, {255, "@"}};
 
 public:
   void openBMP(const std::string &fileName) {
@@ -106,7 +107,7 @@ public:
            _pDIBheader->width, _pDIBheader->height, _pDIBheader->data_size,
            _pDIBheader->byts_per_pixel);
 
-    printf("\n");
+    printf("\nImage output using ANSI codes:\n\n");
     for (std::size_t i = 0; i < _pDIBheader->height; ++i) {
       for (std::size_t g = 0; g < _pDIBheader->width; ++g) {
         printf("%s  ",
@@ -115,7 +116,15 @@ public:
       }
       printf("\u001b[0m\n");
     }
-    printf("\n");
+
+    printf("\nCharacter output:\n\n");
+    for (std::size_t i = 0; i < _pDIBheader->height; ++i) {
+      for (std::size_t g = 0; g < _pDIBheader->width; ++g) {
+        printf("%s", int_char[_pdata[((i * _pDIBheader->width) + g) *
+                                     _pDIBheader->byts_per_pixel]]);
+      }
+      printf("\n");
+    }
   }
 
   void closeBMP() {
