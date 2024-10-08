@@ -4,7 +4,7 @@
 <img src="./preview.gif" alt="BMPreader" align="center" height="500px">
 
 ### :blue_book: About:
-    BMPreader for 24 and 32 bit image.
+    BMPreader for 24 and 32 bit image, image output is implemented using ANSI codes .
 
 ### :link: Links:
 * Source code: [CLICK](./src/).
