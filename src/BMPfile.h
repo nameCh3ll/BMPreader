@@ -2,33 +2,35 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <string>
+#include <sys/types.h>
 #include <unordered_map>
 
-class BMPfile {
+template <typename Alloc = std::allocator<char>> class BMPfile {
 private:
 #pragma pack(push, 1)
   struct BMPheader {
-    unsigned char ID[2];
-    unsigned int file_size;
-    unsigned char unused[4];
-    unsigned int pixel_offset;
+    u_char ID[2];
+    u_int32_t file_size;
+    u_char unused[4];
+    u_int32_t pixel_offset;
   };
 #pragma pack(pop)
 
 #pragma pack(push, 1)
   struct DIBheader {
-    unsigned int DIBheader_size;
-    unsigned int width;
-    unsigned int height;
-    unsigned short color_planes;
-    unsigned short byts_per_pixel;
-    unsigned int comp;
-    unsigned int data_size;
-    unsigned int pwidth;
-    unsigned int pheight;
-    unsigned int colors_count;
-    unsigned int imp_colors_count;
+    u_int32_t DIBheader_size;
+    u_int32_t width;
+    u_int32_t height;
+    u_int16_t color_planes;
+    u_int16_t byts_per_pixel;
+    u_int32_t comp;
+    u_int32_t data_size;
+    u_int32_t pwidth;
+    u_int32_t pheight;
+    u_int32_t colors_count;
+    u_int32_t imp_colors_count;
   };
 #pragma pack(pop)
 
@@ -40,7 +42,7 @@ private:
   static constexpr int _SIZE_BMP_h{sizeof(BMPheader)};
   static constexpr int _SIZE_DIB_h{sizeof(DIBheader)};
 
-  [[no_unique_address]] std::allocator<char> _alloc;
+  [[no_unique_address]] Alloc _alloc;
   using Allocator_traits = std::allocator_traits<decltype(_alloc)>;
 
   std::unordered_map<unsigned int, const char *> int_background_color{
